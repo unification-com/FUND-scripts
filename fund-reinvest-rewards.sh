@@ -10,17 +10,17 @@
 
 ##############################################################################################################################################################
 
-#amended code for FUND by FUNDAustralia & FUNDThailand
+#Amended code for the Unifiation Network $FUND by FUNDAustralia & FUNDThailand
 
 ##############################################################################################################################################################
 # User settings.
 ##############################################################################################################################################################
 
-KEY=""                                     # This is the key you wish to use for signing transactions, listed in first column of "undcli keys list".
-PASSPHRASE=""                             # Only populate if you want to run the script periodically. This is UNSAFE and should only be done if you know what you are doing.
-DENOM="nund"                                        # Coin denominator is uatom ("microoatom"). 1 FUND = 1000000 nund.
-MINIMUM_DELEGATION_AMOUNT="5000000000"              # Only perform delegations above this amount of nund. Default: 5 FUND
-RESERVATION_AMOUNT="5000000000"                     # Keep this amount of nund in account. Default: 5 FUND
+KEY=""                                         # This is the key you wish to use for signing transactions, listed in first column of "undcli keys list".
+PASSPHRASE=""                                  # Only populate if you want to run the script periodically. This is UNSAFE and should only be done if you know what you are doing.
+DENOM="nund"                                   # Coin denominator is uatom ("microoatom"). 1 FUND = 1000000 nund.
+MINIMUM_DELEGATION_AMOUNT="5000000000"         # Only perform delegations above this amount of nund. Default: 5 FUND
+RESERVATION_AMOUNT="5000000000"                # Keep this amount of nund in account. Default: 5 FUND
 VALIDATOR="undvaloper1csy76g5uhq0h68g9e34uyf88eac24jy93r7de3"        # Default is FUNDAustralia.
 
 ##############################################################################################################################################################
