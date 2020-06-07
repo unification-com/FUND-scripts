@@ -10,7 +10,7 @@
 
 ##############################################################################################################################################################
 
-#Amended code for the Unification $FUND by FUNDAustralia & FUNDThailand
+#Amended code for Unification $FUND by DAVE & FUNDThailand
 
 ##############################################################################################################################################################
 # User settings.
@@ -18,10 +18,10 @@
 
 KEY=""                                         # This is the key you wish to use for signing transactions, listed in first column of "undcli keys list".
 PASSPHRASE=""                                  # Only populate if you want to run the script periodically. This is UNSAFE and should only be done if you know what you are doing.
-DENOM="nund"                                   # Coin denominator is uatom ("microoatom"). 1 FUND = 1000000 nund.
+DENOM="nund"                                   # Coin denominator is nund ("microfund"). 1 FUND = 1000000000nund.
 MINIMUM_DELEGATION_AMOUNT="5000000000"         # Only perform delegations above this amount of nund. Default: 5 FUND
 RESERVATION_AMOUNT="5000000000"                # Keep this amount of nund in account. Default: 5 FUND
-VALIDATOR="undvaloper1csy76g5uhq0h68g9e34uyf88eac24jy93r7de3"        # Default is FUNDAustralia.
+VALIDATOR="undvaloper1csy76g5uhq0h68g9e34uyf88eac24jy93r7de3"        # Default is DAVE.
 
 ##############################################################################################################################################################
 
@@ -163,7 +163,7 @@ echo "  Details: ${VALIDATOR_DETAILS}"
 echo
 
 # Run transactions
-MEMO=$'rewards @ FUNDAustralia'
+MEMO=$'rewards @ DAVE'
 if [ "${REWARDS_BALANCE}" -gt 0 ]
 then
     printf "Withdrawing rewards..."
