@@ -1,0 +1,21 @@
+{
+  "name": "valset",
+  "version": "0.0.1",
+  "description": "Quick script to check valsets between Tendermint RPC and Cosmos SDK REST endpoints",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com:unification-com/FUND-scripts/valset"
+  },
+  "author": "Codegnosis",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "bech32": "^1.1.4",
+    "lodash": "^4.17.19",
+    "minimist": "^1.2.5"
+  }
+}
