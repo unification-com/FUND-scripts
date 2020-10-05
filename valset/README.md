@@ -18,12 +18,12 @@ node index.js --rpc=[RCP_URL] --lcd=[LCD_URL] --height=[BLOCK_HEIGHT]
 Example:
 
 ```bash 
-node index.js --rpc=https://rpc1.unification.io:26657 --lcd=https://rest.unification.io --height=1350573
+node index.js --rpc=https://rpc1.unification.io --lcd=https://rest.unification.io --height=2186786
 ```
 
 Application expects 3 argument flags:
 
-- `--rpc`: URL for RPC node, e.g. https://rpc1.unification.io:26657.
+- `--rpc`: URL for RPC node, e.g. https://rpc1.unification.io.
 - `--lcd`: URL for REST interface, e.g. https://rest.unification.io.
 - `--height`: height at which to run cross-reference.
 
