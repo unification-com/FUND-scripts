@@ -30,6 +30,11 @@ const bech32ToPubkey = (pubkey) => {
     return buffer.slice(pubkeyAminoPrefix.length).toString('base64')
 }
 
+const getDelegatorAddress = (operatorAddr) => {
+    const address = bech32.decode(operatorAddr)
+    return bech32.encode("und", address.words)
+}
+
 const fetchData = (url) => {
     return new Promise((resolve, reject) => {
         console.log("fetch", url)
@@ -44,14 +49,17 @@ const fetchData = (url) => {
 })
 }
 
-const processData = (rpcValset, lcdValset) => {
+const processData = (rpcValset, lcdValset, blockData) => {
     const valset = []
+    const blockSigs = blockData.result.block.last_commit.signatures
     try {
         for(let i = 0; i < lcdValset.result.length; i += 1) {
             let valData = {}
             let val = lcdValset.result[i]
+            valData.blockHeight = blockData.result.block.header.height
             valData.name = val.description.moniker
             valData.operatorAddress = val.operator_address
+            valData.selfDelegateAddress = getDelegatorAddress(val.operator_address)
             valData.consensusPubkey = val.consensus_pubkey
             valData.jailed = val.jailed
             valData.status = val.status
@@ -66,9 +74,17 @@ const processData = (rpcValset, lcdValset) => {
             let idx = _.findIndex(rpcValset.result.validators, function(o) { return o.pub_key.value == tendermintPubkey; });
 
             if(idx > -1) {
+                const tendermintAddress = rpcValset.result.validators[idx].address
                 valData.inTendermintValset = true
-                valData.tendermintAddress = rpcValset.result.validators[idx].address
+                valData.tendermintAddress = tendermintAddress
                 valData.tendermintVotingPower = rpcValset.result.validators[idx].voting_power
+
+                let sigIdx = _.findIndex(blockSigs, function(o) { return o.validator_address == tendermintAddress; });
+                if(sigIdx > -1) {
+                    valData.block_sig = blockSigs[sigIdx]
+                } else {
+                    valData.block_sig = false
+                }
             }
 
             valset.push(valData)
@@ -83,8 +99,12 @@ const run = async() => {
 
     console.log("at height:", height)
 
-    Promise.all([fetchData(RPC + '/validators?height=' + height + '&per_page=100'), fetchData(LCD + '/staking/validators?height=' + height)]).then((values) => {
-        let valset = processData(values[0], values[1])
+    Promise.all([
+        fetchData(RPC + '/validators?height=' + height + '&per_page=100'),
+        fetchData(LCD + '/staking/validators?height=' + height),
+        fetchData(RPC + '/block?height=' + height)
+    ]).then((values) => {
+        let valset = processData(values[0], values[1], values[2])
         console.log("valset cross reference:", valset)
     }).catch(console.error)
 }
